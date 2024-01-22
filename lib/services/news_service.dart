@@ -34,6 +34,7 @@ class NewsService {
           title: article['title'] ?? "",
           description: article['description'] ?? "",
           author: article['author'] ?? "",
+          urlArticle: article['url'],
         );
         articlesList.add(articleModel);
         // }
@@ -78,6 +79,7 @@ class NewsService {
           title: article['title'] ?? "",
           description: article['description'] ?? "",
           author: article['author'] ?? "",
+          urlArticle: article['url'],
         );
         articlesList.add(articleModel);
         // }

@@ -3,6 +3,7 @@ import 'package:news_app/widgets/tag_widget.dart';
 
 import '../colors_const.dart';
 import '../models/article_model.dart';
+import '../views/web_news_view.dart';
 
 class BodyNewsWidget extends StatelessWidget {
   const BodyNewsWidget({super.key});
@@ -24,7 +25,7 @@ class BodyNewsWidget extends StatelessWidget {
           TagWidget(
             color: semonBright,
             children: [
-              Icon(Icons.person),
+              const Icon(Icons.person),
               const SizedBox(width: 15),
               Flexible(
                 child: Text(
@@ -42,7 +43,13 @@ class BodyNewsWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(height: 1.5),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WebNewsView(url: news.urlArticle),
+                  ));
+            },
             child: Text(
               "read more..",
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
