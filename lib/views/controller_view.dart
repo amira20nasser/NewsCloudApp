@@ -56,6 +56,7 @@ class ControllerView extends StatelessWidget {
             ),
             AnimatedTextKit(
               repeatForever: true,
+              pause: Duration(seconds: 180),
               animatedTexts: [
                 ColorizeAnimatedText(
                   "Cloud",
@@ -66,7 +67,7 @@ class ControllerView extends StatelessWidget {
                     fontSize: 27,
                   ),
                   colors: [
-                    blueDark,
+                    yankeesBlue,
                     semonDark,
                   ],
                 ),

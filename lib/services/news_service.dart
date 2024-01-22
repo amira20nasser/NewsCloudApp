@@ -33,6 +33,7 @@ class NewsService {
           image: article['urlToImage'] ?? "",
           title: article['title'] ?? "",
           description: article['description'] ?? "",
+          author: article['author'] ?? "",
         );
         articlesList.add(articleModel);
         // }
@@ -76,6 +77,7 @@ class NewsService {
           image: article['urlToImage'] ?? "",
           title: article['title'] ?? "",
           description: article['description'] ?? "",
+          author: article['author'] ?? "",
         );
         articlesList.add(articleModel);
         // }

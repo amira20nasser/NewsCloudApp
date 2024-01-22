@@ -33,10 +33,10 @@ class CategoryCard extends StatelessWidget {
               color:
                   BlocProvider.of<GetTopHeadlinesCategory>(context).category ==
                           type.toLowerCase()
-                      ? blueDark
+                      ? yankeesBlue
                       : Colors.white,
               border: Border.all(
-                color: blueDark,
+                color: yankeesBlue,
                 width: 2,
               ),
             ),
@@ -48,7 +48,7 @@ class CategoryCard extends StatelessWidget {
                                 .category ==
                             type.toLowerCase()
                         ? Colors.white
-                        : blueDark,
+                        : yankeesBlue,
                   ),
             ),
           ),

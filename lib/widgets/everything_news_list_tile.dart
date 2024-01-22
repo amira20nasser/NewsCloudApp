@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news_app/colors_const.dart';
 import 'package:news_app/models/article_model.dart';
 
+import '../views/news_details.dart';
+
 class EverythingNewsListTile extends StatelessWidget {
   const EverythingNewsListTile({super.key, required this.news});
   final ArticleModel news;
@@ -34,15 +36,25 @@ class EverythingNewsListTile extends StatelessWidget {
           },
         ),
       ),
-      title: Text(
-        // textDirection: TextDirection.rtl,
-        news.title,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
-          color: Colors.black87,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
+      title: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NewsDetails(),
+              settings: RouteSettings(arguments: news),
+            ),
+          );
+        },
+        child: Text(
+          news.title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            color: Colors.black87,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
       subtitle: Column(
