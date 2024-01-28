@@ -22,13 +22,14 @@ class ArticleModelAdapter extends TypeAdapter<ArticleModel> {
       description: fields[2] as String,
       author: fields[3] as String,
       urlArticle: fields[4] as String,
+      isLike: fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, ArticleModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.image)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class ArticleModelAdapter extends TypeAdapter<ArticleModel> {
       ..writeByte(3)
       ..write(obj.author)
       ..writeByte(4)
-      ..write(obj.urlArticle);
+      ..write(obj.urlArticle)
+      ..writeByte(5)
+      ..write(obj.isLike);
   }
 
   @override

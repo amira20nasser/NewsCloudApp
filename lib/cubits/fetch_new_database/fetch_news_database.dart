@@ -16,6 +16,7 @@ class FetchNewsDataBaseCubit extends Cubit<FetchNewsState> {
     articles = notesBox.values.toList();
     if (articles?.isEmpty ?? true) {
       emit(NoNews());
+      return;
     }
     emit(FetchNewsSuccess());
   }

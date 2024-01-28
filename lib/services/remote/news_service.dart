@@ -39,6 +39,7 @@ class NewsService {
         for (var ele in articlesdatabase) {
           if (article['title'] == ele.title) {
             isliked = true;
+            break;
           }
         }
         ArticleModel articleModel = ArticleModel(
@@ -87,24 +88,19 @@ class NewsService {
 
       List<ArticleModel> articlesdatabase = notesBox.values.toList();
       for (var article in articles) {
-        // if (article['urlToImage'] != null &&
-        //     article['title'] != null &&
-        //     article['description'] != null) {
-        bool isliked = false;
-        for (var ele in articlesdatabase) {
-          if (article['title'] == ele.title) {
-            isliked = true;
-          }
-        }
         ArticleModel articleModel = ArticleModel(
           image: article['urlToImage'] ?? "",
           title: article['title'] ?? "",
           description: article['description'] ?? "",
           author: article['author'] ?? "",
           urlArticle: article['url'],
-          isLike: isliked,
         );
-
+        bool found = articlesdatabase
+            .any((element) => element.title == articleModel.title);
+        if (found) {
+          print(" the !! ${articleModel.title}");
+          articleModel.isLike = true;
+        }
         articlesList.add(articleModel);
         // }
       }

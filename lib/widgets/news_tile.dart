@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/colors_const.dart';
-import 'package:news_app/cubits/add_news_database/add_news_states.dart';
+import 'package:news_app/cubits/add_delete_news_database/add_delete_news_states.dart';
 import 'package:news_app/views/news_details.dart';
-import '../cubits/add_news_database/add_news_database.dart';
+import '../cubits/add_delete_news_database/add_delete_news_database.dart';
 import '../cubits/fetch_new_database/fetch_news_database.dart';
 import '../models/article_model.dart';
 
@@ -73,7 +73,6 @@ class NewsTile extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     news.description,
-                    // textDirection: TextDirection.rtl,
                     maxLines: 2,
                     style: const TextStyle(
                       color: Colors.grey,
@@ -99,10 +98,13 @@ class NewsTile extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   onPressed: () {
-                    BlocProvider.of<AddDeleteNewsDataBaseCubit>(context)
-                        .addDataDatabase(news);
-                    BlocProvider.of<FetchNewsDataBaseCubit>(context)
-                        .fetchAllNews();
+                    if (news.isLike) {
+                      BlocProvider.of<AddDeleteNewsDataBaseCubit>(context)
+                          .deleteDataDatabase(news);
+                    } else {
+                      BlocProvider.of<AddDeleteNewsDataBaseCubit>(context)
+                          .addDataDatabase(news);
+                    }
                   },
                 ),
                 TextButton.icon(

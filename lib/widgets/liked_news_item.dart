@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/colors_const.dart';
-import 'package:news_app/cubits/add_news_database/add_news_database.dart';
-import 'package:news_app/cubits/add_news_database/add_news_states.dart';
+import 'package:news_app/cubits/add_delete_news_database/add_delete_news_database.dart';
+import 'package:news_app/cubits/add_delete_news_database/add_delete_news_states.dart';
 import 'package:news_app/cubits/fetch_new_database/fetch_news_database.dart';
 import 'package:news_app/models/article_model.dart';
 

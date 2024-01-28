@@ -13,7 +13,7 @@ class ArticleModel extends HiveObject {
   final String author;
   @HiveField(4)
   final String urlArticle;
-
+  @HiveField(5)
   bool isLike;
   ArticleModel({
     required this.image,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:news_app/cubits/add_news_database/add_news_database.dart';
+import 'package:news_app/cubits/add_delete_news_database/add_delete_news_database.dart';
 import 'package:news_app/models/article_model.dart';
 import 'package:news_app/theme.dart';
 import 'package:news_app/views/controller_view.dart';
@@ -14,8 +14,8 @@ void main() async {
   await Hive.initFlutter();
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(ArticleModelAdapter());
-  await Hive.openBox<ArticleModel>(kNewsBox);
 
+  await Hive.openBox<ArticleModel>(kNewsBox);
   runApp(const NewsApp());
 }
 
