@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/article_model.dart';
-import '../../services/news_service.dart';
+import '../../services/remote/news_service.dart';
 import 'categories_states.dart';
 
 class GetTopHeadlinesCategory extends Cubit<CategoryState> {

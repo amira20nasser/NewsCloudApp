@@ -8,6 +8,7 @@ import '../colors_const.dart';
 import '../cubits/get_index_tab_cubit/get_index_tab_cubit.dart';
 import '../cubits/get_index_tab_cubit/get_index_tab_states.dart';
 import 'home_view.dart';
+import 'liked_news_view.dart';
 import 'news_view.dart';
 
 class ControllerView extends StatelessWidget {
@@ -56,7 +57,7 @@ class ControllerView extends StatelessWidget {
             ),
             AnimatedTextKit(
               repeatForever: true,
-              pause: Duration(seconds: 180),
+              pause: const Duration(seconds: 180),
               animatedTexts: [
                 ColorizeAnimatedText(
                   "Cloud",
@@ -76,16 +77,20 @@ class ControllerView extends StatelessWidget {
           ],
         ),
       ),
+      //bloclistener
       body: BlocBuilder<GetIndexTabCubit, NavigationState>(
         builder: (context, state) {
           if (state is NewsTabState) {
-            return const NewsView();
+            //don't add constant
+            return NewsView();
           }
           if (state is SearchTabState) {
             return const SearchView();
           }
           if (state is LikedTabState) {
-            return const Text("Hwll");
+            //don't add constant
+
+            return LikedNewsView();
           }
           if (state is SettingTabState) {
             return const Text("settings");

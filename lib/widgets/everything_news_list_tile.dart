@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/colors_const.dart';
+import 'package:news_app/cubits/add_news_database/add_news_database.dart';
+import 'package:news_app/cubits/add_news_database/add_news_states.dart';
+import 'package:news_app/cubits/fetch_new_database/fetch_news_database.dart';
 import 'package:news_app/models/article_model.dart';
 
+import '../cubits/get_everything_cubit/get_everything_news_cubit.dart';
 import '../views/news_details.dart';
 
 class EverythingNewsListTile extends StatelessWidget {
@@ -9,6 +14,8 @@ class EverythingNewsListTile extends StatelessWidget {
   final ArticleModel news;
   @override
   Widget build(BuildContext context) {
+    debugPrint("${news.isLike}");
+
     return ListTile(
       leading: SizedBox(
         width: 80,
@@ -41,7 +48,7 @@ class EverythingNewsListTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const NewsDetails(),
+              builder: (context) => const NewsDetailsView(),
               settings: RouteSettings(arguments: news),
             ),
           );
@@ -62,16 +69,27 @@ class EverythingNewsListTile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TextButton.icon(
-                icon: const Icon(
-                  Icons.thumb_up_alt_outlined,
-                  size: 13,
-                ),
-                label: Text(
-                  "Like",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                onPressed: () {},
+              BlocBuilder<AddDeleteNewsDataBaseCubit, AddDeleteNewsState>(
+                builder: (context, state) {
+                  return TextButton.icon(
+                    icon: news.isLike
+                        ? Icon(Icons.thumb_up_alt, color: bluebright)
+                        : const Icon(Icons.thumb_up_alt_outlined),
+                    label: Text(
+                      "Like",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    onPressed: () {
+                      if (news.isLike) {
+                        BlocProvider.of<AddDeleteNewsDataBaseCubit>(context)
+                            .deleteDataDatabase(news);
+                      } else {
+                        BlocProvider.of<AddDeleteNewsDataBaseCubit>(context)
+                            .addDataDatabase(news);
+                      }
+                    },
+                  );
+                },
               ),
               TextButton.icon(
                 icon: const Icon(

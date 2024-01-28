@@ -15,18 +15,15 @@ class HomeView extends StatelessWidget {
     return BlocProvider(
       create: (context) => GetTopHeadlinesCategory(),
       child: Builder(
-        builder: (BuildContext context) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+        builder: (BuildContext context) => const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             //children is silver
             slivers: [
-              const SliverToBoxAdapter(child: CategoriesListView()),
-              const SliverPadding(padding: EdgeInsets.only(top: 30)),
-              NewsFutureBuilder(
-                  category: BlocProvider.of<GetTopHeadlinesCategory>(context)
-                      .category
-                      .toLowerCase()),
+              SliverToBoxAdapter(child: CategoriesListView()),
+              SliverPadding(padding: EdgeInsets.only(top: 30)),
+              NewsFutureBuilder(),
               // SliverToBoxAdapter(
               //   child: NewsListView(),
               // ),

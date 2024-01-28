@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/widgets/tag_widget.dart';
 
-import '../cubits/top_headlines_category_cubit/top_headlines_category_cubit.dart';
 import '../models/article_model.dart';
 
 class HeaderNewsWidget extends StatelessWidget {

@@ -1,30 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/cubits/fetch_new_database/fetch_news_state.dart';
 
+import '../cubits/fetch_new_database/fetch_news_database.dart';
 import '../models/article_model.dart';
 import 'everything_news_list_tile.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class EverythingNewsListView extends StatelessWidget {
-  const EverythingNewsListView({
+import 'liked_news_item.dart';
+
+class LikedListView extends StatelessWidget {
+  const LikedListView({
     super.key,
-    required this.articles,
   });
-  final List<ArticleModel> articles;
 
   @override
   Widget build(BuildContext context) {
-    return articles.isEmpty
-        ? Column(
-            children: [
-              const SizedBox(height: 170),
-              const Center(child: Text("Not Available try again later!")),
-              Image.asset(
-                height: 200,
-                "assets/Screenshot 2023-11-01 005246.png",
-              ),
-            ],
-          )
-        : AnimationLimiter(
+    return BlocBuilder<FetchNewsDataBaseCubit, FetchNewsState>(
+      builder: (context, state) {
+        List<ArticleModel> articles =
+            BlocProvider.of<FetchNewsDataBaseCubit>(context).articles ?? [];
+        if (state is FetchNewsSuccess) {
+          return AnimationLimiter(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) =>
@@ -39,12 +37,23 @@ class EverythingNewsListView extends StatelessWidget {
                     flipAxis: FlipAxis.y,
                     duration: const Duration(milliseconds: 1500),
                     curve: Curves.fastLinearToSlowEaseIn,
-                    child: EverythingNewsListTile(news: articles[index]),
+                    child: LikedNewsItem(news: articles[index]),
                   ),
                 ),
               ),
               itemCount: articles.length,
             ),
           );
+        } else {
+          //empty
+          return const Center(
+            child: Text(
+              "No Liked articles",
+              style: TextStyle(color: Colors.black),
+            ),
+          );
+        }
+      },
+    );
   }
 }

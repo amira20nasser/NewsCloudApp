@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:news_app/cubits/add_news_database/add_news_database.dart';
+import 'package:news_app/models/article_model.dart';
 import 'package:news_app/theme.dart';
 import 'package:news_app/views/controller_view.dart';
+import 'bloc_observer.dart';
+import 'const.dart';
+import 'cubits/fetch_new_database/fetch_news_database.dart';
 import 'cubits/get_index_tab_cubit/get_index_tab_cubit.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  Bloc.observer = SimpleBlocObserver();
+  Hive.registerAdapter(ArticleModelAdapter());
+  await Hive.openBox<ArticleModel>(kNewsBox);
+
   runApp(const NewsApp());
 }
 
@@ -17,13 +28,23 @@ class NewsApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIndexTabCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetIndexTabCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AddDeleteNewsDataBaseCubit(),
+        ),
+        BlocProvider(
+          create: (context) => FetchNewsDataBaseCubit(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'News App',
         theme: theme,
-        home: ControllerView(),
+        home: const ControllerView(),
       ),
     );
   }

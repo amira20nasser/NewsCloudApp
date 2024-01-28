@@ -9,9 +9,8 @@ import 'news_list_view.dart';
 class NewsFutureBuilder extends StatelessWidget {
   const NewsFutureBuilder({
     super.key,
-    required this.category,
   });
-  final String category;
+
   @override
   Widget build(BuildContext context) {
     debugPrint("Calling NewsFutureBuilder");

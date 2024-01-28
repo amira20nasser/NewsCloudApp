@@ -8,6 +8,7 @@ class NewsListView extends StatelessWidget {
     required this.articles,
   });
   final List<ArticleModel> articles;
+
   @override
   Widget build(BuildContext context) {
     return SliverList(

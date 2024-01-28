@@ -28,7 +28,7 @@ ThemeData theme = ThemeData(
     bodyLarge: TextStyle(fontSize: 16.0, color: yankeesBlue),
     bodyMedium: TextStyle(fontSize: 14.0, color: yankeesBlue),
     bodySmall: TextStyle(fontSize: 10, color: yankeesBlue),
-    headlineSmall: TextStyle(
+    headlineSmall: const TextStyle(
       fontWeight: FontWeight.bold,
       color: Colors.white,
       height: 1.25,

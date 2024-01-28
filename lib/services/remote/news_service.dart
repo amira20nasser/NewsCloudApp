@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hive/hive.dart';
 import 'package:news_app/api_constants.dart';
 import 'package:news_app/models/article_model.dart';
+
+import '../../const.dart';
 
 class NewsService {
   final Dio dio;
@@ -29,12 +32,22 @@ class NewsService {
         // if (article['urlToImage'] != null &&
         //     article['title'] != null &&
         //     article['description'] != null) {
+        var notesBox = Hive.box<ArticleModel>(kNewsBox);
+
+        List<ArticleModel> articlesdatabase = notesBox.values.toList();
+        bool isliked = false;
+        for (var ele in articlesdatabase) {
+          if (article['title'] == ele.title) {
+            isliked = true;
+          }
+        }
         ArticleModel articleModel = ArticleModel(
           image: article['urlToImage'] ?? "",
           title: article['title'] ?? "",
           description: article['description'] ?? "",
           author: article['author'] ?? "",
           urlArticle: article['url'],
+          isLike: isliked,
         );
         articlesList.add(articleModel);
         // }
@@ -70,17 +83,28 @@ class NewsService {
       Map<String, dynamic> jsonData = response.data;
       List<dynamic> articles = jsonData['articles'];
       List<ArticleModel> articlesList = [];
+      var notesBox = Hive.box<ArticleModel>(kNewsBox);
+
+      List<ArticleModel> articlesdatabase = notesBox.values.toList();
       for (var article in articles) {
         // if (article['urlToImage'] != null &&
         //     article['title'] != null &&
         //     article['description'] != null) {
+        bool isliked = false;
+        for (var ele in articlesdatabase) {
+          if (article['title'] == ele.title) {
+            isliked = true;
+          }
+        }
         ArticleModel articleModel = ArticleModel(
           image: article['urlToImage'] ?? "",
           title: article['title'] ?? "",
           description: article['description'] ?? "",
           author: article['author'] ?? "",
           urlArticle: article['url'],
+          isLike: isliked,
         );
+
         articlesList.add(articleModel);
         // }
       }
