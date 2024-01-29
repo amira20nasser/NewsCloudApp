@@ -22,7 +22,7 @@ class ArticleModelAdapter extends TypeAdapter<ArticleModel> {
       description: fields[2] as String,
       author: fields[3] as String,
       urlArticle: fields[4] as String,
-      isLike: fields[5] as bool,
+      isLike: true,
     );
   }
 

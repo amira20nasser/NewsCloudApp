@@ -16,31 +16,15 @@ class HomeView extends StatelessWidget {
       create: (context) => GetTopHeadlinesCategory(),
       child: Builder(
         builder: (BuildContext context) => const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: CustomScrollView(
             physics: BouncingScrollPhysics(),
-            //children is silver
             slivers: [
               SliverToBoxAdapter(child: CategoriesListView()),
               SliverPadding(padding: EdgeInsets.only(top: 30)),
               NewsFutureBuilder(),
-              // SliverToBoxAdapter(
-              //   child: NewsListView(),
-              // ),
             ],
           ),
-          // child: ListView(
-          //   children: [
-          //     CategoriesListView(),
-          //     SizedBox(
-          //       height: 30,
-          //     ),
-          //     Expanded(
-          //       flex: 3,
-          //       child: NewsListView(),
-          //     ),
-          //   ],
-          // ),
         ),
       ),
     );

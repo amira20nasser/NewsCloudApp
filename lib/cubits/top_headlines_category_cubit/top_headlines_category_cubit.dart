@@ -10,7 +10,7 @@ class GetTopHeadlinesCategory extends Cubit<CategoryState> {
   GetTopHeadlinesCategory() : super(BusinessState()) {
     // getNews(category: "general");
   }
-
+  static get(context) => BlocProvider.of<GetTopHeadlinesCategory>(context);
   String category = "general";
   // Color color = Colors.white;
 

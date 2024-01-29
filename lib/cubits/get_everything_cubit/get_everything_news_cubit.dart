@@ -12,6 +12,7 @@ class GetEverythingNewsCubit extends Cubit<EverthingNewsState> {
     emit(LoadedEverthingNewsState());
   }
 
+  static get(context) => BlocProvider.of<GetEverythingNewsCubit>(context);
   String sortBy = "popularity";
   Future<List<ArticleModel>> getNews({String? sortBy}) async {
     debugPrint("GetEverythingNewsCubit calling getNews sortby $sortBy ");

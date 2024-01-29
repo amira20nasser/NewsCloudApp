@@ -16,10 +16,10 @@ class NewsFutureBuilder extends StatelessWidget {
     debugPrint("Calling NewsFutureBuilder");
     return BlocBuilder<GetTopHeadlinesCategory, CategoryState>(
       builder: (context, state) {
+        String category = GetTopHeadlinesCategory.get(context).category;
         return FutureBuilder<List<ArticleModel>>(
-          future: BlocProvider.of<GetTopHeadlinesCategory>(context).getNews(
-              category:
-                  BlocProvider.of<GetTopHeadlinesCategory>(context).category),
+          future:
+              GetTopHeadlinesCategory.get(context).getNews(category: category),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return NewsListView(articles: snapshot.data ?? []);

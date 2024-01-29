@@ -3,12 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubits/fetch_new_database/fetch_news_state.dart';
 
+import '../animation/animation_list_view.dart';
 import '../cubits/fetch_new_database/fetch_news_database.dart';
 import '../models/article_model.dart';
-import 'everything_news_list_tile.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import 'liked_news_item.dart';
 
 class LikedListView extends StatelessWidget {
   const LikedListView({
@@ -20,32 +17,11 @@ class LikedListView extends StatelessWidget {
     return BlocBuilder<FetchNewsDataBaseCubit, FetchNewsState>(
       builder: (context, state) {
         List<ArticleModel> articles =
-            BlocProvider.of<FetchNewsDataBaseCubit>(context).articles ?? [];
+            FetchNewsDataBaseCubit.get(context).articles ?? [];
         if (state is FetchNewsSuccess) {
-          return AnimationLimiter(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) =>
-                  AnimationConfiguration.staggeredList(
-                position: index,
-                delay: const Duration(milliseconds: 100),
-                child: SlideAnimation(
-                  duration: const Duration(milliseconds: 2500),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  verticalOffset: 300,
-                  child: FlipAnimation(
-                    flipAxis: FlipAxis.y,
-                    duration: const Duration(milliseconds: 1500),
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    child: LikedNewsItem(news: articles[index]),
-                  ),
-                ),
-              ),
-              itemCount: articles.length,
-            ),
-          );
+          return AnimationListView(articles: articles);
         } else {
-          //empty
+          //empty list
           return const Center(
             child: Text(
               "No Liked articles",

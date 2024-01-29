@@ -8,7 +8,7 @@ import 'fetch_news_state.dart';
 
 class FetchNewsDataBaseCubit extends Cubit<FetchNewsState> {
   FetchNewsDataBaseCubit() : super(FetchNewsInitial());
-
+  static get(context) => BlocProvider.of<FetchNewsDataBaseCubit>(context);
   List<ArticleModel>? articles;
   fetchAllNews() {
     var notesBox = Hive.box<ArticleModel>(kNewsBox);

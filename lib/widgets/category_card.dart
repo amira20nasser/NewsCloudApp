@@ -15,26 +15,20 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        "in card $type  ${BlocProvider.of<GetTopHeadlinesCategory>(context).category} ");
-
     return BlocBuilder<GetTopHeadlinesCategory, CategoryState>(
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            debugPrint("in card $type");
-            BlocProvider.of<GetTopHeadlinesCategory>(context)
-                .onTap(type.toLowerCase());
+            GetTopHeadlinesCategory.get(context).onTap(type.toLowerCase());
           },
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color:
-                  BlocProvider.of<GetTopHeadlinesCategory>(context).category ==
-                          type.toLowerCase()
-                      ? yankeesBlue
-                      : Colors.white,
+              color: GetTopHeadlinesCategory.get(context).category ==
+                      type.toLowerCase()
+                  ? yankeesBlue
+                  : Colors.white,
               border: Border.all(
                 color: yankeesBlue,
                 width: 2,
@@ -44,8 +38,7 @@ class CategoryCard extends StatelessWidget {
               type,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     height: 1,
-                    color: BlocProvider.of<GetTopHeadlinesCategory>(context)
-                                .category ==
+                    color: GetTopHeadlinesCategory.get(context).category ==
                             type.toLowerCase()
                         ? Colors.white
                         : yankeesBlue,
