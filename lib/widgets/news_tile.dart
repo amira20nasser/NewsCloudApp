@@ -4,7 +4,6 @@ import 'package:news_app/colors_const.dart';
 import 'package:news_app/cubits/add_delete_news_database/add_delete_news_states.dart';
 import 'package:news_app/views/news_details.dart';
 import '../cubits/add_delete_news_database/add_delete_news_database.dart';
-import '../cubits/fetch_new_database/fetch_news_database.dart';
 import '../models/article_model.dart';
 
 class NewsTile extends StatelessWidget {

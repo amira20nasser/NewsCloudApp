@@ -19,9 +19,6 @@ void main() async {
   runApp(const NewsApp());
 }
 
-//Like and store in  local storage
-//make animation in listview
-//make webview on click on news
 class NewsApp extends StatelessWidget {
   const NewsApp({super.key});
 

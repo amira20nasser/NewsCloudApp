@@ -5,6 +5,7 @@ import 'package:news_app/colors_const.dart';
 import 'package:news_app/cubits/add_delete_news_database/add_delete_news_database.dart';
 import 'package:news_app/cubits/add_delete_news_database/add_delete_news_states.dart';
 import 'package:news_app/models/article_model.dart';
+import '../animation/page_navigation_animation.dart';
 import '../const.dart';
 import '../views/news_details.dart';
 
@@ -44,10 +45,17 @@ class EverythingNewsListTile extends StatelessWidget {
       ),
       title: InkWell(
         onTap: () {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => const NewsDetailsView(),
+          //     settings: RouteSettings(arguments: news),
+          //   ),
+          // );
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => const NewsDetailsView(),
+            buildTransitionAnimation(
+              page: NewsDetailsView(),
               settings: RouteSettings(arguments: news),
             ),
           );

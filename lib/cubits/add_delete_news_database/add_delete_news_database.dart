@@ -15,7 +15,6 @@ class AddDeleteNewsDataBaseCubit extends Cubit<AddDeleteNewsState> {
     try {
       var newsBox = Hive.box<ArticleModel>(kNewsBox);
       await newsBox.add(article);
-      debugPrint("save in database liked news");
       emit(AddNewsSuccess());
     } catch (e) {
       emit(AddNewsFailure(e.toString()));
@@ -39,9 +38,7 @@ class AddDeleteNewsDataBaseCubit extends Cubit<AddDeleteNewsState> {
       articlesdatabase
           .firstWhere((element) => element.title == article.title)
           .delete();
-      print(" identical ${article.title}  ${article.isLike}");
-    } else {
-      print(" not identical  ${article.title}  ${article.isLike}");
+      debugPrint(" identical ${article.title}  ${article.isLike}");
     }
 
     article.isLike = false;
