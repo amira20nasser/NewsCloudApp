@@ -15,59 +15,88 @@ class LikedNewsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint("${news.isLike}");
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: ListTile(
-        leading: SizedBox(
-          width: 80,
-          height: 80,
-          child: Image.network(
-            news.image,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return const Center(
-                child: Icon(
-                  Icons.image,
-                  size: 60,
+    return Dismissible(
+      key: UniqueKey(),
+      confirmDismiss: (direction) =>
+          Future.value(direction == DismissDirection.endToStart),
+      onDismissed: (direction) {
+        if (direction == DismissDirection.endToStart) {
+          BlocProvider.of<AddDeleteNewsDataBaseCubit>(context)
+              .deleteDataDatabase(news);
+          BlocProvider.of<FetchNewsDataBaseCubit>(context).fetchAllNews();
+          _showToast(context);
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: ListTile(
+          leading: SizedBox(
+            width: 80,
+            height: 80,
+            child: Image.network(
+              news.image,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return const Center(
+                  child: Icon(
+                    Icons.image,
+                    size: 60,
+                  ),
+                );
+              },
+            ),
+          ),
+          title: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NewsDetailsView(),
+                  settings: RouteSettings(arguments: news),
                 ),
               );
             },
-          ),
-        ),
-        title: InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const NewsDetailsView(),
-                settings: RouteSettings(arguments: news),
+            child: Text(
+              news.title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
-            );
-          },
-          child: Text(
-            news.title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.black87,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
             ),
           ),
+          // trailing: BlocBuilder<AddDeleteNewsDataBaseCubit, AddDeleteNewsState>(
+          //   builder: (context, state) {
+          //     return IconButton(
+          //       icon: news.isLike
+          //           ? Icon(Icons.thumb_up_alt, color: bluebright)
+          //           : const Icon(Icons.thumb_up_alt_outlined),
+          //       onPressed: () {
+          //         BlocProvider.of<AddDeleteNewsDataBaseCubit>(context)
+          //             .deleteDataDatabase(news);
+          //         BlocProvider.of<FetchNewsDataBaseCubit>(context)
+          //             .fetchAllNews();
+          //       },
+          //     );
+          //   },
+          // ),
         ),
-        trailing: BlocBuilder<AddDeleteNewsDataBaseCubit, AddDeleteNewsState>(
-          builder: (context, state) {
-            return IconButton(
-              icon: news.isLike
-                  ? Icon(Icons.thumb_up_alt, color: bluebright)
-                  : const Icon(Icons.thumb_up_alt_outlined),
-              onPressed: () {
-                BlocProvider.of<AddDeleteNewsDataBaseCubit>(context)
-                    .deleteDataDatabase(news);
-                BlocProvider.of<FetchNewsDataBaseCubit>(context).fetchAllNews();
-              },
-            );
-          },
+      ),
+    );
+  }
+
+  void _showToast(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        dismissDirection: DismissDirection.endToStart,
+        shape: const StadiumBorder(),
+        backgroundColor: Colors.black.withOpacity(0.5),
+        content: const Text(
+          'Remove from favorite',
+          textAlign: TextAlign.center,
         ),
       ),
     );

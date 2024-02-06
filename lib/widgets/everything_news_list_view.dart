@@ -17,7 +17,7 @@ class EverythingNewsListView extends StatelessWidget {
         ? Column(
             children: [
               const SizedBox(height: 170),
-              const Center(child: Text("Not Available try again later!")),
+              const Center(child: Text("Not Available")),
               Image.asset(
                 height: 200,
                 "assets/Screenshot 2023-11-01 005246.png",

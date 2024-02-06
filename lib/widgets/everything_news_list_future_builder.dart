@@ -13,8 +13,6 @@ class EverythingNewsListFutureBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("Calling EverythingNewsListFutureBuilder");
-
     return BlocBuilder<GetEverythingNewsCubit, EverthingNewsState>(
       builder: (context, state) {
         return FutureBuilder<List<ArticleModel>>(
@@ -22,6 +20,8 @@ class EverythingNewsListFutureBuilder extends StatelessWidget {
               .getNews(sortBy: GetEverythingNewsCubit.get(context).sortBy),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              debugPrint("Calling EverythingNewsListFutureBuilder*");
+
               return EverythingNewsListView(articles: snapshot.data ?? []);
             } else if (snapshot.hasError) {
               return const Text('oops there was an error, try later');
