@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:news_app/colors_const.dart';
 import 'package:news_app/cubits/add_delete_news_database/add_delete_news_database.dart';
 import 'package:news_app/cubits/add_delete_news_database/add_delete_news_states.dart';
 import 'package:news_app/models/article_model.dart';
 import '../animation/page_navigation_animation.dart';
-import '../const.dart';
 import '../views/news_details.dart';
 
 class EverythingNewsListTile extends StatelessWidget {
@@ -55,7 +53,7 @@ class EverythingNewsListTile extends StatelessWidget {
           Navigator.push(
             context,
             buildTransitionAnimation(
-              page: NewsDetailsView(),
+              page: const NewsDetailsView(),
               settings: RouteSettings(arguments: news),
             ),
           );

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../colors_const.dart';
@@ -15,11 +14,11 @@ class CustomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(19),
       child: Image.network(
         news.image,
-        height: 200,
-        width: double.infinity,
+        height: 300,
+        width: MediaQuery.sizeOf(context).width,
         fit: BoxFit.cover,
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) {

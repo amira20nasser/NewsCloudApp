@@ -16,15 +16,6 @@ class ControllerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          Icon(Icons.search),
-          SizedBox(width: 15),
-          Icon(
-            Icons.notifications,
-          ),
-          SizedBox(width: 20),
-        ],
-        centerTitle: false,
         title: const TitleOfAppBar(),
       ),
       bottomNavigationBar: BlocConsumer<GetIndexTabCubit, NavigationState>(
@@ -38,7 +29,7 @@ class ControllerView extends StatelessWidget {
         builder: (context, state) {
           if (state is NewsTabState) {
             //don't add constant
-            return NewsView();
+            return const NewsView();
           }
           if (state is SearchTabState) {
             return const SearchView();
@@ -46,7 +37,7 @@ class ControllerView extends StatelessWidget {
           if (state is LikedTabState) {
             //don't add constant
 
-            return LikedNewsView();
+            return const LikedNewsView();
           }
           if (state is SettingTabState) {
             return const Text("settings");

@@ -18,8 +18,8 @@ class EverythingNewsListFutureBuilder extends StatelessWidget {
     return BlocBuilder<GetEverythingNewsCubit, EverthingNewsState>(
       builder: (context, state) {
         return FutureBuilder<List<ArticleModel>>(
-          future: BlocProvider.of<GetEverythingNewsCubit>(context).getNews(
-              sortBy: BlocProvider.of<GetEverythingNewsCubit>(context).sortBy),
+          future: GetEverythingNewsCubit.get(context)
+              .getNews(sortBy: GetEverythingNewsCubit.get(context).sortBy),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return EverythingNewsListView(articles: snapshot.data ?? []);

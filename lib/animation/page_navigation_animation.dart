@@ -6,8 +6,8 @@ PageRouteBuilder buildTransitionAnimation({
 }) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, anotherAnimation) => page,
-    transitionDuration: Duration(milliseconds: 500),
-    reverseTransitionDuration: Duration(milliseconds: 250),
+    transitionDuration: const Duration(milliseconds: 500),
+    reverseTransitionDuration: const Duration(milliseconds: 250),
     settings: settings,
     transitionsBuilder: (context, animation, anotherAnimation, child) {
       animation = CurvedAnimation(

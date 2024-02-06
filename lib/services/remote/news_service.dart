@@ -98,7 +98,7 @@ class NewsService {
         bool found = articlesdatabase
             .any((element) => element.title == articleModel.title);
         if (found) {
-          print(" the !! ${articleModel.title}");
+          debugPrint(" the !! ${articleModel.title}");
           articleModel.isLike = true;
         }
         articlesList.add(articleModel);

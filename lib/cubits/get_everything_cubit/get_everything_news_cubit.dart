@@ -14,7 +14,8 @@ class GetEverythingNewsCubit extends Cubit<EverthingNewsState> {
 
   static get(context) => BlocProvider.of<GetEverythingNewsCubit>(context);
   String sortBy = "popularity";
-  Future<List<ArticleModel>> getNews({String? sortBy}) async {
+  Future<List<ArticleModel>> getNews(
+      {String? sortBy, String? searchFor}) async {
     debugPrint("GetEverythingNewsCubit calling getNews sortby $sortBy ");
     List<ArticleModel> articles = [];
     try {
@@ -22,7 +23,7 @@ class GetEverythingNewsCubit extends Cubit<EverthingNewsState> {
       articles = await newsService.getEverything(
         country: "us",
         language: "en",
-        q: "palestine", //required parameter
+        q: searchFor ?? "palestine", //required parameter
         sortBy: sortBy ?? this.sortBy,
       );
       if (sortBy != null) this.sortBy = sortBy;
